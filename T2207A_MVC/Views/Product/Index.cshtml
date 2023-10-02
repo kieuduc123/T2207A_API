@@ -1,0 +1,47 @@
+﻿@model List<T2207A_MVC.Entities.Product>
+@{
+    ViewData["Title"] = "List product";
+}
+
+
+<div class="text-center mb-3">
+    <h1>List product</h1>
+</div>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Decsription</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.image" alt="@item.name" class="img-thumbnail" width="100"/>
+                </td>
+                <td>@item.name</td>
+                <td>@item.price</td>
+                <td>@item.category.name</td>
+                <td>@item.description</td>
+                <td>
+                    <a href="@Url.ActionLink("Edit", "Product", new { id = item.id})" class="btn btn-success">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+
+                    <a onclick="return confirm('You definitely want to delete @item.name')" href="@Url.ActionLink("Delete", "Product", new {id=item.id})" class="btn btn-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/product/create" class="btn btn-primary">Create product</a>
